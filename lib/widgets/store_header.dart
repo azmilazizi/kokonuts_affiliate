@@ -43,16 +43,11 @@ class StoreHeader extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 2),
-                      ),
-                      child: ClipOval(
-                        child: SizedBox.square(
-                          dimension: 72,
-                          child: NetImage(Config.avatar),
-                        ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(18),
+                      child: SizedBox.square(
+                        dimension: 76,
+                        child: NetImage(Config.avatar, fit: BoxFit.contain),
                       ),
                     ),
                     const SizedBox(width: 14),
