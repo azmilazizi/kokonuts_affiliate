@@ -50,12 +50,12 @@ class StoreHeader extends StatelessWidget {
                       ),
                       child: ClipOval(
                         child: SizedBox.square(
-                          dimension: 56,
+                          dimension: 72,
                           child: NetImage(Config.avatar),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 14),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,7 @@ class StoreHeader extends StatelessWidget {
                             Config.name,
                             style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
