@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <!-- Replaced by `flutter build web --base-href`; "/" for affiliate.kokonuts.my -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kokonuts Affiliate</title>
+  <meta name="description" content="Cari barang dari video Kokonuts ikut nombor. Link Shopee &amp; TikTok Shop.">
+  <meta name="theme-color" content="#EE4D2D">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <!-- Social share preview (WhatsApp / FB) -->
+  <meta property="og:title" content="Kokonuts Affiliate">
+  <meta property="og:description" content="Taip nombor item dari video, terus jumpa barang.">
+
+  <style>
+    html, body { margin: 0; height: 100%; background: #F5F5F5; }
+    /* Splash shown until Flutter paints its first frame
+       (removed in flutter_bootstrap.js). Pure CSS, no images to load. */
+    #splash {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px; background: #F5F5F5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      transition: opacity .25s;
+    }
+    #splash .logo {
+      width: 64px; height: 64px; border-radius: 50%; background: #EE4D2D; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; font-weight: 700;
+    }
+    #splash .name { font-size: 18px; font-weight: 600; color: #333; }
+    #splash .spin {
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 3px solid #f3c2b8; border-top-color: #EE4D2D;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div id="splash">
+    <div class="logo">K</div>
+    <div class="name">Kokonuts Affiliate</div>
+    <div class="spin"></div>
+  </div>
+  <noscript>Sila aktifkan JavaScript untuk guna laman ini.</noscript>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

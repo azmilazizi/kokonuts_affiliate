@@ -1,0 +1,9 @@
+# cPanel Git Version Control -> "Deploy HEAD Commit" runs these tasks.
+# It copies the pre-built site (build/web, committed by deploy.sh) into the
+# subdomain's document root. Change DEPLOYPATH if your document root differs.
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=$HOME/public_html/affiliate/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R build/web/. $DEPLOYPATH

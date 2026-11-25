@@ -1,0 +1,154 @@
+{
+  "items": [
+    {
+      "item_no": 145,
+      "name": "Cordless Vacuum Murah",
+      "image_url": "https://picsum.photos/seed/kk145/400/400",
+      "price": 30.31,
+      "category_id": 3,
+      "links": {
+        "shopee": "https://shopee.com.my/",
+        "tiktok": null
+      }
+    },
+    {
+      "item_no": 132,
+      "name": "Air Fryer 5L Digital",
+      "image_url": "https://picsum.photos/seed/kk132/400/400",
+      "price": 22.37,
+      "category_id": 1,
+      "links": {
+        "shopee": "https://shopee.com.my/",
+        "tiktok": "https://www.tiktok.com/"
+      }
+    },
+    {
+      "item_no": 118,
+      "name": "Rak Kasut 5 Tingkat",
+      "image_url": "https://picsum.photos/seed/kk118/400/400",
+      "price": 29.74,
+      "category_id": 2,
+      "links": {
+        "shopee": null,
+        "tiktok": "https://www.tiktok.com/"
+      }
+    },
+    {
+      "item_no": 97,
+      "name": "Powerbank 20000mAh Slim",
+      "image_url": "https://picsum.photos/seed/kk97/400/400",
+      "price": null,
+      "category_id": 3,
+      "links": {
+        "shopee": "https://shopee.com.my/",
+        "tiktok": null
+      }
+    },
+    {
+      "item_no": 84,
+      "name": "Serum Vitamin C",
+      "image_url": "https://picsum.photos/seed/kk84/400/400",
+      "price": 44.48,
+      "category_id": 4,
+      "links": {
+        "shopee": "https://shopee.com.my/",
+        "tiktok": "https://www.tiktok.com/"
+      }
+    },
+    {
+      "item_no": 71,
+      "name": "Pisau Dapur Set 6 Pcs",
+      "image_url": "https://example.invalid/broken.jpg",
+      "price": 51.85,
+      "category_id": 1,
+      "links": {
+        "shopee": null,
+        "tiktok": "https://www.tiktok.com/"
+      }
+    },
+    {
+      "item_no": 56,
+      "name": "Lampu LED Sensor Gerak",
+      "image_url": "https://picsum.photos/seed/kk56/400/400",
+      "price": 59.22,
+      "category_id": 2,
+      "links": {
+        "shopee": "https://shopee.com.my/",
+        "tiktok": null
+      }
+    },
+    {
+      "item_no": 42,
+      "name": "Earbuds Bluetooth Bass",
+      "image_url": "https://picsum.photos/seed/kk42/400/400",
+      "price": null,
+      "category_id": 3,
+      "links": {
+        "shopee": "https://shopee.com.my/",
+        "tiktok": "https://www.tiktok.com/"
+      }
+    },
+    {
+      "item_no": 23,
+      "name": "Bekas Makanan Kedap Udara",
+      "image_url": "https://picsum.photos/seed/kk23/400/400",
+      "price": 73.96,
+      "category_id": 1,
+      "links": {
+        "shopee": null,
+        "tiktok": "https://www.tiktok.com/"
+      }
+    },
+    {
+      "item_no": 17,
+      "name": "Cermin Makeup LED",
+      "image_url": "https://picsum.photos/seed/kk17/400/400",
+      "price": 81.33,
+      "category_id": 4,
+      "links": {
+        "shopee": "https://shopee.com.my/",
+        "tiktok": null
+      }
+    },
+    {
+      "item_no": 9,
+      "name": "Penyapu Getah Serbaguna",
+      "image_url": "https://picsum.photos/seed/kk9/400/400",
+      "price": 88.7,
+      "category_id": 2,
+      "links": {
+        "shopee": "https://shopee.com.my/",
+        "tiktok": "https://www.tiktok.com/"
+      }
+    },
+    {
+      "item_no": 3,
+      "name": "Holder Phone Kereta Magnet",
+      "image_url": "https://picsum.photos/seed/kk3/400/400",
+      "price": null,
+      "category_id": 3,
+      "links": {
+        "shopee": null,
+        "tiktok": "https://www.tiktok.com/"
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Dapur"
+    },
+    {
+      "id": 2,
+      "name": "Rumah"
+    },
+    {
+      "id": 3,
+      "name": "Gajet"
+    },
+    {
+      "id": 4,
+      "name": "Kecantikan"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+# Kokonuts Affiliate - Apache rules for cPanel.
+# Lives in web/ so `flutter build web` copies it into build/web.
+
+DirectoryIndex index.html
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1) Short links: affiliate.kokonuts.my/23  ->  CRM redirector.
+  #    302 (not 301) so browsers don't cache it forever if the link changes.
+  RewriteRule ^([0-9]+)/?$ https://crm.kokonuts.my/affiliate/go/$1 [R=302,L]
+
+  # 2) Force https (X-Forwarded-Proto check avoids loops behind Cloudflare/proxy).
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # 3) Anything that isn't a real file or folder -> the Flutter app.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# 4) Always re-check these with the server so new uploads show immediately.
+#    (The other files are fine to cache normally.)
+<IfModule mod_headers.c>
+  <FilesMatch "^(index\.html|main\.dart\.js|flutter_bootstrap\.js|flutter\.js|flutter_service_worker\.js)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
