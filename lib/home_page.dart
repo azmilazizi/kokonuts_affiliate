@@ -24,6 +24,10 @@ class _HomePageState extends State<HomePage> {
 
   // null while loading; set once loaded. _error set if loading failed.
   Catalog? _catalog;
+  PublicSettings _settings = const PublicSettings(
+    title: 'Kokonuts Affiliate Products',
+    description: 'Find the products from our videos by entering the item number below.',
+  );
   Object? _error;
 
   // Pre-fill from the URL, e.g. affiliate.kokonuts.my/?q=23
@@ -31,7 +35,7 @@ class _HomePageState extends State<HomePage> {
     text: Uri.base.queryParameters['q'] ?? '',
   );
   int? _categoryId; // null = all
-  int _tab = 0; // 0 = Barang, 1 = Kategori
+  int _tab = 0; // 0 = Products, 1 = Categories
 
   @override
   void initState() {
@@ -52,7 +56,16 @@ class _HomePageState extends State<HomePage> {
     });
     try {
       final c = await loadCatalog();
-      if (mounted) setState(() => _catalog = c);
+      PublicSettings s;
+      try {
+        s = await loadPublicSettings();
+      } catch (_) {
+        s = _settings;
+      }
+      if (mounted) setState(() {
+        _catalog = c;
+        _settings = s;
+      });
     } catch (e) {
       debugPrint('loadCatalog failed: $e');
       if (mounted) setState(() => _error = e);
@@ -75,6 +88,10 @@ class _HomePageState extends State<HomePage> {
                   SliverToBoxAdapter(
                     child: StoreHeader(
                       itemCount: _catalog?.items.length ?? 0,
+                      title: _settings.title,
+                      description: _settings.description,
+                      hasShopee: _catalog?.items.any((i) => i.shopeeUrl != null) ?? false,
+                      hasTiktok: _catalog?.items.any((i) => i.tiktokUrl != null) ?? false,
                       search: _search,
                       // Typing always jumps back to the product grid.
                       onSearch: (_) => setState(() => _tab = 0),
@@ -125,7 +142,7 @@ class _HomePageState extends State<HomePage> {
 
     return Material(
       color: Colors.white,
-      child: Row(children: [tab('Barang', 0), tab('Kategori', 1)]),
+      child: Row(children: [tab('Products', 0), tab('Categories', 1)]),
     );
   }
 
@@ -204,7 +221,7 @@ class _HomePageState extends State<HomePage> {
       child: Align(
         alignment: Alignment.centerLeft,
         child: InputChip(
-          label: Text(name ?? 'Kategori'),
+          label: Text(name ?? 'Category'),
           onDeleted: () => setState(() => _categoryId = null),
           backgroundColor: Colors.white,
         ),
@@ -234,7 +251,7 @@ class _HomePageState extends State<HomePage> {
     return SliverList.list(
       children: [
         const SizedBox(height: _gap),
-        row('Semua', null, catalog.items.length),
+        row('All products', null, catalog.items.length),
         for (final c in catalog.categories) ...[
           const Divider(height: 1),
           row(c.name, c.id, counts[c.id] ?? 0),
@@ -251,12 +268,12 @@ class _HomePageState extends State<HomePage> {
         children: [
           const Icon(Icons.wifi_off, size: 40, color: Colors.black38),
           const SizedBox(height: 12),
-          const Text('Tak dapat load barang.', textAlign: TextAlign.center),
+          const Text('Unable to load products.', textAlign: TextAlign.center),
           const SizedBox(height: 12),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: kOrange),
             onPressed: _load,
-            child: const Text('Cuba lagi'),
+            child: const Text('Try again'),
           ),
         ],
       ),
@@ -275,7 +292,7 @@ class _EmptyView extends StatelessWidget {
         Icon(Icons.search_off, size: 40, color: Colors.black38),
         SizedBox(height: 12),
         Text(
-          'Nombor tu tak jumpa. Cuba nombor lain.',
+          'Item not found. Try another number.',
           textAlign: TextAlign.center,
         ),
       ],
@@ -290,8 +307,8 @@ class _Footer extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.fromLTRB(16, 24, 16, 32),
     child: Text(
-      'Link affiliate — saya mungkin dapat komisen kecil, '
-      'harga sama untuk anda.\n© ${DateTime.now().year} Kokonuts',
+      'Affiliate links may earn us a small commission. Prices are shown for '
+      'reference only.\n© ${DateTime.now().year} Kokonuts',
       textAlign: TextAlign.center,
       style: const TextStyle(fontSize: 12, color: Colors.black45),
     ),

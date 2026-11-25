@@ -8,12 +8,20 @@ import 'net_image.dart';
 /// Blurred cover + avatar + name + item count + tagline + search field.
 class StoreHeader extends StatelessWidget {
   final int itemCount;
+  final String title;
+  final String description;
+  final bool hasShopee;
+  final bool hasTiktok;
   final TextEditingController search;
   final ValueChanged<String> onSearch;
 
   const StoreHeader({
     super.key,
     required this.itemCount,
+    required this.title,
+    required this.description,
+    required this.hasShopee,
+    required this.hasTiktok,
     required this.search,
     required this.onSearch,
   });
@@ -56,7 +64,7 @@ class StoreHeader extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            Config.name,
+                            title,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -73,13 +81,17 @@ class StoreHeader extends StatelessWidget {
                               color: Colors.white.withAlpha(50),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Text(
-                              '$itemCount item',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                            ),
+                            child: Row(mainAxisSize: MainAxisSize.min, children: [
+                              if (hasShopee) ...[
+                                const Icon(Icons.shopping_bag_rounded, color: Color(0xFFFFB000), size: 14),
+                                const SizedBox(width: 3),
+                              ],
+                              if (hasTiktok) ...[
+                                const Icon(Icons.music_note_rounded, color: Colors.white, size: 14),
+                                const SizedBox(width: 4),
+                              ],
+                              Text('$itemCount items', style: const TextStyle(color: Colors.white, fontSize: 12)),
+                            ]),
                           ),
                         ],
                       ),
@@ -88,7 +100,7 @@ class StoreHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  Config.tagline,
+                  description,
                   maxLines: 2,
                   style: const TextStyle(
                     color: Colors.white,
@@ -104,7 +116,7 @@ class StoreHeader extends StatelessWidget {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
-                    hintText: 'Cari nombor atau nama barang',
+                    hintText: 'Search by item number or product name',
                     hintStyle: const TextStyle(color: Colors.black38),
                     prefixIcon: const Icon(Icons.search, color: Colors.black38),
                     // Clear button only when there's text.

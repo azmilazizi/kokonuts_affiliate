@@ -62,6 +62,18 @@ class Catalog {
   );
 }
 
+class PublicSettings {
+  final String title;
+  final String description;
+
+  const PublicSettings({required this.title, required this.description});
+
+  factory PublicSettings.fromJson(Map<String, dynamic> j) => PublicSettings(
+        title: (j['title'] ?? '').toString(),
+        description: (j['description'] ?? '').toString(),
+      );
+}
+
 int? _toInt(Object? v) =>
     v is num ? v.toInt() : (v is String ? int.tryParse(v) : null);
 

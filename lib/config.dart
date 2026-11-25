@@ -24,6 +24,6 @@ class Config {
   static const String cover = 'assets/cover.png';
 
   static const String tagline =
-      'Taip nombor item dari video kat bawah ni 🔍\n'
-      'Nanti keluar barang yang korang cari.';
+      'Enter the item number from our videos below 🔍\n'
+      'We will show you the product you are looking for.';
 }
