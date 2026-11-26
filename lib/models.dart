@@ -6,6 +6,9 @@ class Item {
   final String name;
   final String imageUrl;
   final double? price;
+  final double? discountPercent;
+  final int? soldCount;
+  final String? videoUrl;
   final int? categoryId;
   final String? shopeeUrl;
   final String? tiktokUrl;
@@ -15,6 +18,9 @@ class Item {
     required this.name,
     required this.imageUrl,
     this.price,
+    this.discountPercent,
+    this.soldCount,
+    this.videoUrl,
     this.categoryId,
     this.shopeeUrl,
     this.tiktokUrl,
@@ -29,6 +35,9 @@ class Item {
       name: (j['name'] ?? '').toString(),
       imageUrl: (j['image_url'] ?? '').toString(),
       price: _toDouble(j['price']),
+      discountPercent: _toDouble(j['discount_percent']),
+      soldCount: _toInt(j['sold_count']),
+      videoUrl: _nonEmpty(j['video_url']),
       categoryId: _toInt(j['category_id']),
       shopeeUrl: _nonEmpty(links['shopee']),
       tiktokUrl: _nonEmpty(links['tiktok']),

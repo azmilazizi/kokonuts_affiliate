@@ -6,7 +6,7 @@ import 'net_image.dart';
 
 /// Height of everything under the square image (title + price + padding).
 /// home_page.dart uses it to size grid tiles.
-const double kCardTextHeight = 78;
+const double kCardTextHeight = 112;
 
 class ProductCard extends StatelessWidget {
   final Item item;
@@ -49,14 +49,56 @@ class ProductCard extends StatelessWidget {
                     child: Row(
                       children: [
                         if (item.shopeeUrl != null)
-                          const _Badge('Shopee', kOrange),
+                          const _PlatformBadge(
+                            'Shopee',
+                            kOrange,
+                            Icons.shopping_bag_rounded,
+                          ),
                         if (item.shopeeUrl != null && item.tiktokUrl != null)
                           const SizedBox(width: 4),
                         if (item.tiktokUrl != null)
-                          const _Badge('TikTok', Colors.black),
+                          const _PlatformBadge(
+                            'TikTok Shop',
+                            Colors.black,
+                            Icons.music_note_rounded,
+                          ),
                       ],
                     ),
                   ),
+                  if (item.discountPercent != null && item.discountPercent! > 0)
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 9,
+                          vertical: 7,
+                        ),
+                        color: const Color(0xFFFFF1ED),
+                        child: Text(
+                          '-${item.discountPercent!.round()}%',
+                          style: const TextStyle(
+                            color: kOrange,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (item.videoUrl != null)
+                    const Positioned(
+                      right: 10,
+                      bottom: 10,
+                      child: CircleAvatar(
+                        radius: 18,
+                        backgroundColor: Colors.black54,
+                        child: Icon(
+                          Icons.play_arrow_rounded,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -77,19 +119,34 @@ class ProductCard extends StatelessWidget {
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 13, height: 1.3),
+                    style: const TextStyle(fontSize: 18, height: 1.2),
                   ),
-                  if (item.price != null) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      'RM${item.price!.toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        color: kOrange,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      if (item.price != null)
+                        Text(
+                          'RM${item.price!.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            color: kOrange,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      else
+                        const SizedBox.shrink(),
+                      if (item.soldCount != null)
+                        Text(
+                          '${_compactCount(item.soldCount!)} sold',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black87,
+                          ),
+                        ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -100,10 +157,11 @@ class ProductCard extends StatelessWidget {
   }
 }
 
-class _Badge extends StatelessWidget {
+class _PlatformBadge extends StatelessWidget {
   final String label;
   final Color color;
-  const _Badge(this.label, this.color);
+  final IconData icon;
+  const _PlatformBadge(this.label, this.color, this.icon);
 
   @override
   Widget build(BuildContext context) => Container(
@@ -112,15 +170,32 @@ class _Badge extends StatelessWidget {
       color: color,
       borderRadius: BorderRadius.circular(4),
     ),
-    child: Text(
-      label,
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 10,
-        fontWeight: FontWeight.w600,
-      ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: Colors.white, size: 12),
+        const SizedBox(width: 3),
+        Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 10,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
     ),
   );
+}
+
+String _compactCount(int count) {
+  if (count >= 1000000) {
+    return '${(count / 1000000).toStringAsFixed(count % 1000000 == 0 ? 0 : 1)}m+';
+  }
+  if (count >= 1000) {
+    return '${(count / 1000).toStringAsFixed(count % 1000 == 0 ? 0 : 1)}k+';
+  }
+  return '$count';
 }
 
 /// Grey box shown while items load.
