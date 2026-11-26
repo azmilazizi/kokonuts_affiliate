@@ -33,7 +33,7 @@ Future<void> openItem(BuildContext context, Item item) async {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 onPressed: () => _open(shopee),
-                child: const Text('Beli di Shopee'),
+                child: const Text('Buy on Shopee'),
               ),
               const SizedBox(height: 8),
               FilledButton(
@@ -42,7 +42,7 @@ Future<void> openItem(BuildContext context, Item item) async {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 onPressed: () => _open(tiktok),
-                child: const Text('Beli di TikTok Shop'),
+                child: const Text('Buy on TikTok Shop'),
               ),
             ],
           ),

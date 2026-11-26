@@ -25,8 +25,9 @@ class _HomePageState extends State<HomePage> {
   // null while loading; set once loaded. _error set if loading failed.
   Catalog? _catalog;
   PublicSettings _settings = const PublicSettings(
-    title: 'Kokonuts Affiliate Products',
-    description: 'Find the products from our videos by entering the item number below.',
+    title: 'Kokonuts Affiliate Store',
+    description:
+        'Find the products from our videos by entering the item number below.',
   );
   Object? _error;
 
@@ -62,10 +63,12 @@ class _HomePageState extends State<HomePage> {
       } catch (_) {
         s = _settings;
       }
-      if (mounted) setState(() {
-        _catalog = c;
-        _settings = s;
-      });
+      if (mounted) {
+        setState(() {
+          _catalog = c;
+          _settings = s;
+        });
+      }
     } catch (e) {
       debugPrint('loadCatalog failed: $e');
       if (mounted) setState(() => _error = e);
@@ -90,8 +93,16 @@ class _HomePageState extends State<HomePage> {
                       itemCount: _catalog?.items.length ?? 0,
                       title: _settings.title,
                       description: _settings.description,
-                      hasShopee: _catalog?.items.any((i) => i.shopeeUrl != null) ?? false,
-                      hasTiktok: _catalog?.items.any((i) => i.tiktokUrl != null) ?? false,
+                      shopeeCount:
+                          _catalog?.items
+                              .where((i) => i.shopeeUrl != null)
+                              .length ??
+                          0,
+                      tiktokCount:
+                          _catalog?.items
+                              .where((i) => i.tiktokUrl != null)
+                              .length ??
+                          0,
                       search: _search,
                       // Typing always jumps back to the product grid.
                       onSearch: (_) => setState(() => _tab = 0),

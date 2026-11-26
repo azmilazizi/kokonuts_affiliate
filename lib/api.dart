@@ -29,14 +29,19 @@ Future<Catalog> loadCatalog() async {
 Future<PublicSettings> loadPublicSettings() async {
   if (Config.useMock) {
     return const PublicSettings(
-      title: 'Kokonuts Affiliate Products',
-      description: 'Find the products from our videos by entering the item number below.',
+      title: 'Kokonuts Affiliate Store',
+      description:
+          'Find the products from our videos by entering the item number below.',
     );
   }
   final uri = Uri.parse('${Config.apiBase}/affiliate/public/settings');
   final res = await http.get(uri).timeout(const Duration(seconds: 15));
   if (res.statusCode != 200) throw Exception('HTTP ${res.statusCode}');
-  return PublicSettings.fromJson(
+  final settings = PublicSettings.fromJson(
     jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>,
+  );
+  return PublicSettings(
+    title: 'Kokonuts Affiliate Store',
+    description: settings.description,
   );
 }

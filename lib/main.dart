@@ -11,7 +11,7 @@ class AffiliateApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Kokonuts Affiliate',
+      title: 'Kokonuts Affiliate Store',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: kOrange, primary: kOrange),

@@ -69,9 +69,9 @@ class PublicSettings {
   const PublicSettings({required this.title, required this.description});
 
   factory PublicSettings.fromJson(Map<String, dynamic> j) => PublicSettings(
-        title: (j['title'] ?? '').toString(),
-        description: (j['description'] ?? '').toString(),
-      );
+    title: (j['title'] ?? '').toString(),
+    description: (j['description'] ?? '').toString(),
+  );
 }
 
 int? _toInt(Object? v) =>

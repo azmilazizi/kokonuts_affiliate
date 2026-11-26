@@ -10,8 +10,8 @@ class StoreHeader extends StatelessWidget {
   final int itemCount;
   final String title;
   final String description;
-  final bool hasShopee;
-  final bool hasTiktok;
+  final int shopeeCount;
+  final int tiktokCount;
   final TextEditingController search;
   final ValueChanged<String> onSearch;
 
@@ -20,8 +20,8 @@ class StoreHeader extends StatelessWidget {
     required this.itemCount,
     required this.title,
     required this.description,
-    required this.hasShopee,
-    required this.hasTiktok,
+    required this.shopeeCount,
+    required this.tiktokCount,
     required this.search,
     required this.onSearch,
   });
@@ -72,26 +72,28 @@ class StoreHeader extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withAlpha(50),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Row(mainAxisSize: MainAxisSize.min, children: [
-                              if (hasShopee) ...[
-                                const Icon(Icons.shopping_bag_rounded, color: Color(0xFFFFB000), size: 14),
-                                const SizedBox(width: 3),
-                              ],
-                              if (hasTiktok) ...[
-                                const Icon(Icons.music_note_rounded, color: Colors.white, size: 14),
-                                const SizedBox(width: 4),
-                              ],
-                              Text('$itemCount items', style: const TextStyle(color: Colors.white, fontSize: 12)),
-                            ]),
+                          Wrap(
+                            spacing: 6,
+                            runSpacing: 4,
+                            children: [
+                              if (shopeeCount > 0)
+                                _PlatformPill(
+                                  icon: Icons.shopping_bag_rounded,
+                                  iconColor: const Color(0xFFFFB000),
+                                  label: 'Shopee $shopeeCount',
+                                ),
+                              if (tiktokCount > 0)
+                                _PlatformPill(
+                                  icon: Icons.music_note_rounded,
+                                  iconColor: Colors.white,
+                                  label: 'TikTok Shop $tiktokCount',
+                                ),
+                              _PlatformPill(
+                                icon: Icons.inventory_2_rounded,
+                                iconColor: Colors.white70,
+                                label: '$itemCount items',
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -149,4 +151,33 @@ class StoreHeader extends StatelessWidget {
       ),
     );
   }
+}
+
+class _PlatformPill extends StatelessWidget {
+  final IconData icon;
+  final Color iconColor;
+  final String label;
+
+  const _PlatformPill({
+    required this.icon,
+    required this.iconColor,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+    decoration: BoxDecoration(
+      color: Colors.white.withAlpha(50),
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: iconColor, size: 14),
+        const SizedBox(width: 4),
+        Text(label, style: const TextStyle(color: Colors.white, fontSize: 12)),
+      ],
+    ),
+  );
 }
