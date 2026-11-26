@@ -28,9 +28,7 @@
       transition: opacity .25s;
     }
     #splash .logo {
-      width: 64px; height: 64px; border-radius: 50%; background: #EE4D2D; color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 32px; font-weight: 700;
+      width: 64px; height: 64px; object-fit: contain;
     }
     #splash .name { font-size: 18px; font-weight: 600; color: #333; }
     #splash .spin {
@@ -43,7 +41,7 @@
 </head>
 <body>
   <div id="splash">
-    <div class="logo">K</div>
+    <img class="logo" src="favicon.png" alt="Kokonuts logo">
     <div class="name">Kokonuts Affiliate Store</div>
     <div class="spin"></div>
   </div>

@@ -67,6 +67,7 @@ class StoreHeader extends StatelessWidget {
                             title,
                             style: const TextStyle(
                               color: Colors.white,
+                              fontFamily: 'Frankfurter',
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
