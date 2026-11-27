@@ -54,7 +54,7 @@ class StoreHeader extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(18),
                       child: SizedBox.square(
-                        dimension: 76,
+                        dimension: 92,
                         child: NetImage(Config.avatar, fit: BoxFit.contain),
                       ),
                     ),
@@ -68,7 +68,7 @@ class StoreHeader extends StatelessWidget {
                             style: const TextStyle(
                               color: Colors.white,
                               fontFamily: 'Frankfurter',
-                              fontSize: 20,
+                              fontSize: 28,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
